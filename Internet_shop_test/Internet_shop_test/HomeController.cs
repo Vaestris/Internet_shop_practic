@@ -1,5 +1,6 @@
 ﻿using Internet_shop_test.interfaces;
 using Microsoft.AspNetCore.Mvc;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,30 @@ namespace Internet_shop_test
             _ProductsInterface = iproducts;
         }
 
-       
+        public ViewResult Index()
+        {
+            string test = "Hello world";
+             
+            return View(test);
+        }
 
         public ViewResult ProductList()
         {
             var p_roducts = _ProductsInterface.AllProducts;
             return View(p_roducts);
         }
-        
+        public ActionResult List()
+        {
+            ViewBag.Controller = "Customer";
+            ViewBag.Action = "List";
+            return View("ActionName");
+        }
+        public ActionResult PIndex()
+        {
+            ViewBag.Controller = "Customer";
+            ViewBag.Action = "Index";
+            return View("ActionName");
+        }
     }
 
     

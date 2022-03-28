@@ -52,7 +52,7 @@ namespace Internet_shop_test
     public class customer
     {
         public int id { get; set; }
-        public int phone_number { get; set; }
+        public string phone_number { get; set; }
         public string fname { get; set; }
         public string lname { get; set; }
         public string company { get; set; }
@@ -63,8 +63,8 @@ namespace Internet_shop_test
     public class order
     {
         public int id { get; set; }
-        public int product_number { get; set; }
-        public int phone_number { get; set; }
+        
+        
         public int customerId { get; set; }//внещний ключ
         public int productId { get; set; }//внещний ключ
 
