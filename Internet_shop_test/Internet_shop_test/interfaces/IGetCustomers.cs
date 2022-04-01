@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace Internet_shop_test.interfaces
 {
-    interface Orders
+    public interface IGetCustomers
     {
-        IEnumerable<order> AllCategories { set; }
+        
+        IEnumerable<Customer> AllCustomers { get;  }
+       
     }
 }

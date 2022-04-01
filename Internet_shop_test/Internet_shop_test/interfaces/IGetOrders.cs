@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Internet_shop_test.interfaces
 {
-    interface Customers
+    interface IGetOrders
     {
-        IEnumerable<customer> AllCategories { set; }
+        IEnumerable<Order> AllOrders { get; }
     }
 }

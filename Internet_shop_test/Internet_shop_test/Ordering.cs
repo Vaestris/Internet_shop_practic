@@ -9,15 +9,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json;
 
+using Internet_shop_test.interfaces;
+using Internet_shop_test.Repository;
+using Microsoft.EntityFrameworkCore;
+
 namespace Internet_shop_test
 {
-   
+    
     public class consolewrite
     {
+        
         static void consolerite(string[] args)
         {
             
-            customer newcustomer = new customer();
+            Customer newcustomer = new Customer();
             Console.WriteLine("Введите Имя: ");
             newcustomer.fname = Console.ReadLine();
             Console.WriteLine("Введите Фамилию: ");
@@ -26,80 +31,103 @@ namespace Internet_shop_test
             newcustomer.phone_number = Console.ReadLine();
             Console.WriteLine("Введите Компанию: ");
             newcustomer.company = Console.ReadLine();
-            order neworder = new order();
+            Order neworder = new Order();
             Console.WriteLine("Введите Id продкута (системное): ");
             neworder.productId = Console.Read();
             jsonfile jsonfile = new jsonfile();
-            jsonfile.isjsonexists(neworder, newcustomer);
+           // jsonfile.isjsonexists(neworder, newcustomer);
 
 
         }
 
     }
-    public class jsonfile
+    public class jsonfile 
     {
-
-        public void isjsonexists(order order, customer customer)
+        
+        public void isjsonexists(Order order, Customer customer, ProgramContext programContext)
         {
+            bool orderexists = false;
+            bool customerexists = false;
             if (!File.Exists("orderjsonfile.json"))
             {
                 File.Create("orderjsonfile.json");
-                bool exists = false;
-                jsonwriter(order, customer, exists);
+                 orderexists = false;
+               
             }
 
             else
             {
-                bool exists = true;
-                jsonwriter(order, customer, exists);
+                orderexists = true;
+               
             }
             if (!File.Exists("customerjsonfile.json"))
             {
                 File.Create("customerjsonfile.json");
-                bool exists = false;
-                jsonwriter(order, customer, exists);
+                 customerexists = false;
+                
             }
 
             else
             {
-                bool exists = true;
-                jsonwriter(order, customer, exists);
+                 customerexists = true;
+                
             }
-
+            jsonwriter(order, customer, orderexists, customerexists, programContext);
 
         }
-        public void jsonwriter(order order, customer customer, bool exists)
+        public void jsonwriter(Order order, Customer customer, bool orderexists, bool customerexists, ProgramContext programContext)
         {
+            
 
-            order neworder = new order();
+            Order neworder = new Order();
             neworder = order;
-            customer newcustomer = new customer();
+            Customer newcustomer = new Customer();
             newcustomer = customer;
-            List<customer> listc = new List<customer>();
-            List<order> listo = new List<order>();
+            List<Customer> listc = new List<Customer>();
+            List<Order> listo = new List<Order>();
+            List<Customer> Allcustomers = new List<Customer>();
+                
+            GetCustomers getCustomers = new GetCustomers(programContext);
+            IEnumerable<Customer> customers = getCustomers.AllCustomers;
 
+            GetOrders getOrders = new GetOrders(programContext);
+            IEnumerable<Order> orders = getOrders.AllOrders;
 
+            int maxidc = customers.ToList().Max(p => p.id);
+            //int maxido = orders.ToList().Max(p => p.id);
 
 
             string json = File.ReadAllText("customerjsonfile.json");
-            if (exists == true)
+            if (orderexists == true && json != "")
             {
-                listc = JsonSerializer.Deserialize<List<customer>>(json);
+                listc = JsonSerializer.Deserialize<List<Customer>>(json);
+                if (listc.Max(p => p.id) > maxidc)
+                    maxidc = listc.Max(p => p.id);
             }
+            
 
-            listc.Add(newcustomer);
+            newcustomer.id = maxidc;
+
+            listc.Add(newcustomer);            
             json = JsonSerializer.Serialize(listc);
             File.WriteAllText("customerjsonfile.json", json);
 
             json = File.ReadAllText("orderjsonfile.json");
-            if (exists == true)
+            if (customerexists == true && json != "")
             {
-                listo = JsonSerializer.Deserialize<List<order>>(json);
+                listo = JsonSerializer.Deserialize<List<Order>>(json);
+                //if (listo.Max(p => p.id) > maxido)
+                //    maxido = listo.Max(p => p.id);
             }
+
+           
+
+            // neworder.id = maxido;
 
             listo.Add(neworder);
             json = JsonSerializer.Serialize(listo);
             File.WriteAllText("orderjsonfile.json", json);
+            
         }
 
 

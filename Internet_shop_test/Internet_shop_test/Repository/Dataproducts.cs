@@ -19,11 +19,11 @@ namespace Internet_shop_test.Repository
 
         //public IEnumerable<product> AllCategories => throw new NotImplementedException();
 
-        public IEnumerable<product> AllProducts => ProgramContext.Products.Include(c => c.existence);
+        public IEnumerable<Product> AllProducts => ProgramContext.products.Include(c => c.existence);
 
 
 
-        public product getproductid(int id) => ProgramContext.Products.FirstOrDefault(p => p.id == id);
+        public Product getproductid(int id) => ProgramContext.products.FirstOrDefault(p => p.id == id);
 
     }
 }

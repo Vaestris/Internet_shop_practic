@@ -7,7 +7,8 @@ namespace Internet_shop_test.interfaces
 {
     public interface IGetProducts
     {
-        IEnumerable<product> AllProducts { get; }
-        product getproductid(int id);
+        IEnumerable<Product> AllProducts { get; }
+        Product getproductid(int id);
+        
     }
 }

@@ -14,7 +14,7 @@ namespace Internet_shop_test
     public class check
     {
 
-        public void isjsonexists(order order, customer customer, int idc, int ido)
+        public void isjsonexists(Order order, Customer customer, int idc, int ido)
         {
            
             if (File.Exists("orderjsonfile.json"))
@@ -22,36 +22,29 @@ namespace Internet_shop_test
                 filereading(order, customer, idc, ido);
             }
 
-            else
-            {               
-               
-            }
+           
             if (File.Exists("customerjsonfile.json"))
             {
                 filereading(order, customer, idc,  ido);
             }
 
-            else
-            {
-                               
-            }
-
+            
 
         }
-        public void filereading(order order, customer customer, int idc, int ido)
+        public void filereading(Order order, Customer customer, int idc, int ido)
         {
-            order neworder = new order();
+            Order neworder = new Order();
             neworder = order;
-            customer newcustomer = new customer();
+            Customer newcustomer = new Customer();
             newcustomer = customer;
-            List<customer> listc = new List<customer>();
-            List<order> listo = new List<order>();
+            List<Customer> listc = new List<Customer>();
+            List<Order> listo = new List<Order>();
 
             string json = File.ReadAllText("customerjsonfile.json");
-            listc = JsonSerializer.Deserialize<List<customer>>(json);
+            listc = JsonSerializer.Deserialize<List<Customer>>(json);
             
             json = File.ReadAllText("orderjsonfile.json");
-            listo = JsonSerializer.Deserialize<List<order>>(json);
+            listo = JsonSerializer.Deserialize<List<Order>>(json);
 
             neworder = listo.Find(x => x.id == ido);
             newcustomer = listc.Find(x => x.id == idc);
@@ -64,7 +57,7 @@ namespace Internet_shop_test
 
 
         }
-        public void Checking(order order, customer customer)
+        public void Checking(Order order, Customer customer)
         {
 
         }
