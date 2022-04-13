@@ -1,4 +1,5 @@
 **/bin
 bin/
 netcoreapp3.1
-
+obj
+Properties
