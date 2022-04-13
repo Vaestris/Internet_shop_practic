@@ -14,7 +14,7 @@ namespace Internet_shop_practic
 {
     public class Check
     {
-        //Проверяет файл и заполнен ли он и получает из него данные о новом заказе или(и) заказчике      
+        // Проверяет файл заполнен ли он и получает из него данные о новом заказе или(и) заказчике.     
         public void Filereading()
         {
             Order neworder = new Order();            

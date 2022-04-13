@@ -34,7 +34,7 @@ namespace Internet_shop_practic
         public ActionResult List()
         {
             ViewBag.Controller = "Customer";
-            ViewBag.Action = "List";
+            ViewBag.Action = "List";            
             return View("ActionName");
         }
         public ActionResult PIndex()
