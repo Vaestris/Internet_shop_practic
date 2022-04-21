@@ -9,8 +9,8 @@ namespace Internet_shop_practic.Models
     public class Order
     {
         public int Id { get; set; }
-
         public string Address { get; set; }
+
         //внещний ключ
         public int CustomerId { get; set; }
         //внещний ключ

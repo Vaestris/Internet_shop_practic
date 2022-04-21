@@ -44,21 +44,35 @@ namespace Internet_shop_practic
             return View("ActionName");
         }
 
+        // Выводит страницу для ввода заказа и данных заказчика.
        public ActionResult GetOrder()
         {
-            return View();
+            Order order = new Order() {Address= "adress" };
+            return View(order);
         }
 
+        // Получает введенные данные.
         [HttpPost]
-        public ActionResult GetOrder(Customer customer, Order order)
+        public ActionResult GetOrder(Order order)
         {
 
+            string[] errormessage;
             ProgramContext programContext = new ProgramContext();
-           
-            Jsonfile Jsonfile = new Jsonfile();
-            Jsonfile.Jsonwriter(order, customer, programContext);
-            return RedirectToAction("OrderDone");
+
+            Check Check = new Check();
+            Check.Checking(order, out errormessage);
+            if (Array.TrueForAll(errormessage, x=>x == null))
+            {               
+                return RedirectToAction("OrderDone");
+            }
+            else
+            {
+                    
+                    ViewBag.errormessage = errormessage;
+                    return View(order);
+            }
         }
+    
         public ActionResult OrderDone()
         {
             return View();
