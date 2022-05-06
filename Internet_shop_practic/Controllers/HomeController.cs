@@ -1,11 +1,8 @@
 ﻿using Internet_shop_practic.interfaces;
 using Internet_shop_practic.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Internet_shop_practic
 {
@@ -18,32 +15,6 @@ namespace Internet_shop_practic
             _ProductsInterface = iproducts;
         }
 
-        public ViewResult Index()
-        {
-            string test = "Hello world";
-             
-            return View(test);
-        }
-        //[Route("api/[controller]/[action]")]
-        public ViewResult ProductList()
-        {
-
-            var p_roducts = _ProductsInterface.AllProducts;
-            return View(p_roducts);
-        }
-        public ActionResult List()
-        {
-            ViewBag.Controller = "Customer";
-            ViewBag.Action = "List";            
-            return View("ActionName");
-        }
-        public ActionResult PIndex()
-        {
-            ViewBag.Controller = "Customer";
-            ViewBag.Action = "Index";
-            return View("ActionName");
-        }
-
         // Выводит страницу для ввода заказа и данных заказчика.
        public ActionResult GetOrder()
         {
@@ -51,27 +22,7 @@ namespace Internet_shop_practic
             return View(order);
         }
 
-        // Получает введенные данные.
-        [HttpPost]
-        public ActionResult GetOrder(Order order)
-        {
-
-            string[] errormessage;
-            ProgramContext programContext = new ProgramContext();
-
-            Check Check = new Check();
-            Check.Checking(order, out errormessage);
-            if (Array.TrueForAll(errormessage, x=>x == null))
-            {               
-                return RedirectToAction("OrderDone");
-            }
-            else
-            {
-                    
-                    ViewBag.errormessage = errormessage;
-                    return View(order);
-            }
-        }
+         
     
         public ActionResult OrderDone()
         {

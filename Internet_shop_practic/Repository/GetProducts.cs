@@ -12,8 +12,8 @@ namespace Internet_shop_practic.Repository
 {
     public class GetProducts : IGetProducts
     {
-        private readonly ProgramContext ProgramContext;
-        public GetProducts(ProgramContext ProgramContext)
+        private readonly DBmodel ProgramContext;
+        public GetProducts(DBmodel ProgramContext)
         {
             this.ProgramContext = ProgramContext;
         }

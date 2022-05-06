@@ -8,6 +8,6 @@ namespace Internet_shop_practic.interfaces
 {
     interface IGetOrders
     {
-        IEnumerable<Order> AllOrders { get; }
+        IEnumerable<Order> AllOrders { get;  }
     }
 }

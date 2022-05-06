@@ -10,10 +10,10 @@ namespace Internet_shop_practic.Repository
 {
     public class GetOrders : IGetOrders
     {
-        private readonly ProgramContext ProgramContext;
+        private readonly DBmodel ProgramContext;
 
 
-        public GetOrders(ProgramContext ProgramContext)
+        public GetOrders(DBmodel ProgramContext)
         {
             this.ProgramContext = ProgramContext;
         }

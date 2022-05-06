@@ -1,25 +1,25 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Text.Json;
+﻿using System;
 using Internet_shop_practic.Models;
 
 namespace Internet_shop_practic
 {
+    /// <summary>
+    /// Класс, проверяющий правильность введенных данных заказа
+    /// </summary>
     public class Check
     {  
+        /// <summary>
+        /// Проверка введенных данных заказа
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="errormessage"></param>
+        /// <returns></returns>
         public Order Checking(Order order, out string[] errormessage)           
         {
             errormessage = new string[5];
             if (Convert.ToByte(order.Address) > 64 )
             {
-                errormessage[1] = "Адресс слишком длинный";
+                errormessage[1] = "Адрес слишком длинный";
             }
             if (String.IsNullOrEmpty(order.Address))
             {

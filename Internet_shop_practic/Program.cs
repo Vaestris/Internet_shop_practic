@@ -1,33 +1,28 @@
-using Internet_shop_practic.Models;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 
 namespace Internet_shop_practic
 {
+    /// <summary>
+    /// Основной класс, из которого запускается программа
+    /// </summary>
     public class Program
     {
         public static void Main(string[] args)
         {
            
-            using (ProgramContext db = new ProgramContext())
+            using (DBmodel db = new DBmodel())
             {
-                 //db.Customers.Add(new Customer {Phone_number = "1", Fname = "name", Lname = "Lname", Company = "company" });
-                 //db.orders.Add(new Order { id_order = 1, product_number = 1 });
-                //db.products.Add(new Product { product_number = "1", existence = 1, name = "shtuka" });
-                 //db.deliveries.Add(new Delivery { order_number = "1", shipment = true, issued = true, delivered  = true, time = "";});
-                db.SaveChanges();
+                 db.SaveChanges();
             }
             CreateHostBuilder(args).Build().Run();
 
         }
-
+        /// <summary>
+        /// Класс развертывает веб приложение
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

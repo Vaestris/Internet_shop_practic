@@ -1,19 +1,19 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
 using Internet_shop_practic.Models;
-using System.Text.Json;
 using System.IO;
 
 namespace Internet_shop_practic
 {
-    public class ProgramContext : DbContext
+    /// <summary>
+    /// Полкючение к SQL серверу и создание/реадктирвоанеи базы данных
+    /// </summary>
+    public class DBmodel : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
-        public ProgramContext()
+        public DBmodel()
         {
             Database.EnsureCreated();
         }
@@ -22,13 +22,19 @@ namespace Internet_shop_practic
         
         //private const string connectionstring = @"Server=DESKTOP-8HTVICI;Database=internet_sop_test;Trusted_Connection=True";
 
-        //подключние к базе данных
+        /// <summary>
+        /// Конфигурация подключения к SQL серверу
+        /// </summary>
+        /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(connectionstring);
         }
 
-        //Создание модели
+        /// <summary>
+        /// Создание базы данных
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -41,7 +47,7 @@ namespace Internet_shop_practic
             modelBuilder.Entity<Product>().HasKey(u => u.Id);
 
             modelBuilder.Entity<Delivery>().HasKey(u => u.Id);
-            //modelBuilder.Entity<delivery>().HasOne(p => p.order).WithOne(b => b.delivery).HasForeignKey(p => p.orderId);
+           
 
             base.OnModelCreating(modelBuilder);
         }

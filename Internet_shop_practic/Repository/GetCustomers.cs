@@ -10,10 +10,10 @@ namespace Internet_shop_practic.Repository
 {
     public class GetCustomers : IGetCustomers
     {
-        private readonly ProgramContext ProgramContext;
+        private readonly DBmodel ProgramContext;
 
 
-        public GetCustomers(ProgramContext ProgramContext)
+        public GetCustomers(DBmodel ProgramContext)
         {
             this.ProgramContext = ProgramContext;
         }
