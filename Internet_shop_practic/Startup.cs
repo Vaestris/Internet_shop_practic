@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 
 namespace Internet_shop_practic
@@ -13,7 +15,21 @@ namespace Internet_shop_practic
     ///  ласс, роизвод€щий конфигурацию приложени€ и настраивающий сервисы 
     /// </summary>
     public class Startup
-    {     
+    {
+
+        public Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment { get; private set; }
+        public IConfiguration Configuration { get; private set; }
+
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        {
+            this.HostingEnvironment = env;
+            this.Configuration = configuration;
+        }
+         
+
+
+
+
         /// <summary>
         /// –егистрирует сервисы, которые используютс€ приложением.
         /// </summary>
@@ -21,13 +37,17 @@ namespace Internet_shop_practic
         /// <param name="env"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddDbContext<DBmodel>();
+
+            services.AddDbContext<DBmodel>();//(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
             services.AddTransient<IGetProducts, GetProducts>();
             services.AddTransient<IGetCustomers, GetCustomers>();
-
+           
             services.AddMvc();
         }
+        
+            
+        
+
 
         /// <summary>
         /// ”станавливает, как приложение будет обрабатывать запрос.
@@ -45,8 +65,8 @@ namespace Internet_shop_practic
             }
 
             app.UseRouting();
+          
 
-            
 
             app.UseEndpoints(endpoints =>
             {
@@ -70,5 +90,6 @@ namespace Internet_shop_practic
                 
             });
         }
+        
     }
 }

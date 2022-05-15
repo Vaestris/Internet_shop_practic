@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Internet_shop_practic.Models;
 using System.IO;
+using System.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace Internet_shop_practic
 {
@@ -18,8 +20,15 @@ namespace Internet_shop_practic
             Database.EnsureCreated();
         }
 
-        private string connectionstring = File.ReadAllText("appconfig.json").Substring(File.ReadAllText("appconfig.json").IndexOf("Server"), File.ReadAllText("appconfig.json").LastIndexOf('"') - File.ReadAllText("appconfig.json").IndexOf("Server"));
+
+        //Configuration = new ConfigurationBuilder().AddJsonFile("appSettings.json").Build();
+        //private string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionStrings:DefaultConnection"].ConnectionString;
+
+
+
+
         
+        private string ConnectionString = Startup.Configuration.GetConnectionString("BloggingDatabase");
         //private const string connectionstring = @"Server=DESKTOP-8HTVICI;Database=internet_sop_test;Trusted_Connection=True";
 
         /// <summary>
@@ -28,7 +37,7 @@ namespace Internet_shop_practic
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionstring);
+            optionsBuilder.UseSqlServer(ConnectionString);
         }
 
         /// <summary>
