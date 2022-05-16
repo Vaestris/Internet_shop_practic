@@ -7,8 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-
-
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 namespace Internet_shop_practic
 {
     /// <summary>
@@ -23,13 +23,9 @@ namespace Internet_shop_practic
         public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             this.HostingEnvironment = env;
-            this.Configuration = configuration;
+            this.Configuration = (new ConfigurationBuilder()).AddJsonFile("appsettings.json").Build();
         }
          
-
-
-
-
         /// <summary>
         /// Регистрирует сервисы, которые используются приложением.
         /// </summary>
@@ -38,17 +34,15 @@ namespace Internet_shop_practic
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<DBmodel>();//(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
+            //(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
             services.AddTransient<IGetProducts, GetProducts>();
             services.AddTransient<IGetCustomers, GetCustomers>();
-           
+
+            services.AddDbContext<DBmodel>();
+            
             services.AddMvc();
         }
         
-            
-        
-
-
         /// <summary>
         /// Устанавливает, как приложение будет обрабатывать запрос.
         /// </summary>
@@ -56,6 +50,11 @@ namespace Internet_shop_practic
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (DBmodel db = new DBmodel(Configuration))
+            {
+                db.SaveChanges();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -63,8 +62,8 @@ namespace Internet_shop_practic
                 app.UseStaticFiles();
                 
             }
-
-            app.UseRouting();
+            
+                app.UseRouting();
           
 
 
@@ -89,6 +88,7 @@ namespace Internet_shop_practic
 
                 
             });
+           
         }
         
     }

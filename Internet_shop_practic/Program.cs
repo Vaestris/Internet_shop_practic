@@ -12,10 +12,7 @@ namespace Internet_shop_practic
         public static void Main(string[] args)
         {
            
-            using (DBmodel db = new DBmodel())
-            {
-                 db.SaveChanges();
-            }
+           
             CreateHostBuilder(args).Build().Run();
 
         }

@@ -3,6 +3,7 @@ using Internet_shop_practic.Models;
 using System.IO;
 using System.Configuration;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Internet_shop_practic
 {
@@ -11,6 +12,7 @@ namespace Internet_shop_practic
     /// </summary>
     public class DBmodel : DbContext
     {
+        
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -19,17 +21,12 @@ namespace Internet_shop_practic
         {
             Database.EnsureCreated();
         }
-
-
-        //Configuration = new ConfigurationBuilder().AddJsonFile("appSettings.json").Build();
-        //private string ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionStrings:DefaultConnection"].ConnectionString;
-
-
-
-
-        
-        private string ConnectionString = Startup.Configuration.GetConnectionString("BloggingDatabase");
-        //private const string connectionstring = @"Server=DESKTOP-8HTVICI;Database=internet_sop_test;Trusted_Connection=True";
+        static string connectionstring;
+        public DBmodel(IConfiguration configuration)
+        {
+            connectionstring = configuration.GetConnectionString("DefaultConnection");
+            Database.EnsureCreated();
+        }
 
         /// <summary>
         /// Конфигурация подключения к SQL серверу
@@ -37,7 +34,7 @@ namespace Internet_shop_practic
         /// <param name="optionsBuilder"></param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConnectionString);
+            optionsBuilder.UseSqlServer(connectionstring);
         }
 
         /// <summary>
