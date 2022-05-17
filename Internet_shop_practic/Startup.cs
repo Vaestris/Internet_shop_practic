@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-using System.IO;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 namespace Internet_shop_practic
 {
     /// <summary>
@@ -16,10 +13,14 @@ namespace Internet_shop_practic
     /// </summary>
     public class Startup
     {
-
         public Microsoft.AspNetCore.Hosting.IHostingEnvironment HostingEnvironment { get; private set; }
         public IConfiguration Configuration { get; private set; }
 
+        /// <summary>
+        /// Подключения конфигурационного файла "appsetings.json"
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="env"></param>
         public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             this.HostingEnvironment = env;
@@ -32,9 +33,7 @@ namespace Internet_shop_practic
         /// <param name="app"></param>
         /// <param name="env"></param>
         public void ConfigureServices(IServiceCollection services)
-        {
-
-            //(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionStrings:DefaultConnection")));
+        {          
             services.AddTransient<IGetProducts, GetProducts>();
             services.AddTransient<IGetCustomers, GetCustomers>();
 
@@ -61,12 +60,9 @@ namespace Internet_shop_practic
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
                 
-            }
-            
+            }          
                 app.UseRouting();
           
-
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
@@ -84,12 +80,8 @@ namespace Internet_shop_practic
 
                 endpoints.MapControllerRoute(
                name: "default",
-               pattern: "{controller=Home}/{action=PIndex}");
-
-                
-            });
-           
-        }
-        
+               pattern: "{controller=Home}/{action=PIndex}");    
+            });          
+        }        
     }
 }

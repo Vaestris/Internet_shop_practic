@@ -1,8 +1,6 @@
 ﻿using Internet_shop_practic.interfaces;
 using Internet_shop_practic.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-
 
 namespace Internet_shop_practic
 {

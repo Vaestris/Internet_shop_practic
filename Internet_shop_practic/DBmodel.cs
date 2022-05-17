@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Internet_shop_practic.Models;
-using System.IO;
-using System.Configuration;
 using Microsoft.Extensions.Configuration;
-using System;
 
 namespace Internet_shop_practic
 {
@@ -11,8 +8,7 @@ namespace Internet_shop_practic
     /// Полкючение к SQL серверу и создание/реадктирвоанеи базы данных
     /// </summary>
     public class DBmodel : DbContext
-    {
-        
+    {      
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -21,7 +17,11 @@ namespace Internet_shop_practic
         {
             Database.EnsureCreated();
         }
-        static string connectionstring;
+        private static string connectionstring;
+        /// <summary>
+        /// Получение строки подключения 
+        /// </summary>
+        /// <param name="configuration"></param>
         public DBmodel(IConfiguration configuration)
         {
             connectionstring = configuration.GetConnectionString("DefaultConnection");
