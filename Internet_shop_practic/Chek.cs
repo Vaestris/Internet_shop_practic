@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Internet_shop_practic.Models;
 
 namespace Internet_shop_practic
@@ -17,7 +18,7 @@ namespace Internet_shop_practic
         public Order Checking(Order order, out string[] errormessage)           
         {
             errormessage = new string[5];
-            if (Convert.ToByte(order.Address) > 64 )
+            if (Encoding.GetByteCount(order.Address) > 64 )
             {
                 errormessage[1] = "Адрес слишком длинный";
             }
