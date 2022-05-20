@@ -18,10 +18,10 @@ namespace Internet_shop_practic
         public Order Checking(Order order, out string[] errormessage)           
         {
             errormessage = new string[5];
-            if (Encoding.GetByteCount(order.Address) > 64 )
+            /*if (Encoding.GetByteCount(order.Address) > 64 )
             {
                 errormessage[1] = "Адрес слишком длинный";
-            }
+            }*/
             if (String.IsNullOrEmpty(order.Address))
             {
                 errormessage[1] = "Введите адресс";

@@ -1,4 +1,4 @@
-﻿using Internet_shop_practic.interfaces;
+using Internet_shop_practic.interfaces;
 using Internet_shop_practic.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
@@ -11,7 +11,7 @@ namespace Internet_shop_practic
     public class HomeController : Controller
     {
         private readonly IGetProducts _ProductsInterface;
-
+        
         public HomeController(IGetProducts iproducts)
         {
             _ProductsInterface = iproducts;
@@ -19,7 +19,7 @@ namespace Internet_shop_practic
         public ViewResult Index()
         {
             string test = "Hello world";
-
+             
             return View(test);
         }
         //[Route("api/[controller]/[action]")]
@@ -31,7 +31,7 @@ namespace Internet_shop_practic
         public ActionResult List()
         {
             ViewBag.Controller = "Customer";
-            ViewBag.Action = "List";
+            ViewBag.Action = "List";            
             return View("ActionName");
         }
         public ActionResult PIndex()
@@ -42,32 +42,32 @@ namespace Internet_shop_practic
         }
 
         // Выводит страницу для ввода заказа и данных заказчика.
-        public ActionResult GetOrder()
+       public ActionResult GetOrder()
         {
-
-            Order order = new Order() { Address = "adress" };
+            
+            Order order = new Order() {Address= "adress" };
             return View(order);
         }
 
         // Получает введенные данные.
-        [HttpPost]
+        [HttpPost]   
         public ActionResult GetOrder(Order order)
         {
 
             string[] errormessage;
-            DBmodel programContext = new DBmodel();
+            ProgramContext programContext = new ProgramContext();
 
             Check Check = new Check();
             Check.Checking(order, out errormessage);
-            if (Array.TrueForAll(errormessage, x => x == null))
-            {
+            if (Array.TrueForAll(errormessage, x=>x == null))
+            {               
                 return RedirectToAction("OrderDone");
             }
             else
             {
 
-                ViewBag.errormessage = errormessage;
-                return View(order);
+                    ViewBag.errormessage = errormessage;
+                    return View(order);
             }
         }
 
@@ -75,29 +75,6 @@ namespace Internet_shop_practic
         {
             return View();
         }
-
-        public ActionResult GetCustomer()
-        {
-
-           
-            return View();
-        }
-
-        // Получает введенные данные.
-        [HttpPost]
-        public ActionResult GetCustomer(Customer customer)
-        {
-
-        
-         return RedirectToAction("CustomerGeted");
-            
-
-            
-        }
-        public ActionResult CustomerGeted()
-        {
-            return View();
-        }
     }
-
+    
 }

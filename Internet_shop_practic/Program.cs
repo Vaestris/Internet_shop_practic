@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System.Security.Authentication;
 
 namespace Internet_shop_practic
 {
@@ -21,7 +22,14 @@ namespace Internet_shop_practic
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
             {
-                 webBuilder.UseStartup<Startup>();
-             });
-    }
+                webBuilder.ConfigureKestrel(serverOptions =>                
+                {
+                    serverOptions.ConfigureHttpsDefaults(co =>
+                    {
+                        co.SslProtocols = SslProtocols.Tls12;
+                    });
+                }).UseStartup<Startup>() ;
+                webBuilder.UseUrls("https://0.0.0.0:5001");
+            });
+    }      
 }

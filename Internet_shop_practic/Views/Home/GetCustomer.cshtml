@@ -1,0 +1,31 @@
+﻿@using Internet_shop_practic.Models
+
+
+@{ Customer customer = new Customer();
+                }
+@{ ViewBag.Title = "клиент"; }
+<body>
+    <h2>Введите имя и фамилию</h2>
+    <form method="post">
+        @{
+
+
+
+                            <p>
+                                <label>Имя</label><br />
+                                <input type="text" name="FirstName" value=@customer.FirstName />
+                               
+                                
+                            </p>
+                            <p>
+                                <label>Фамилия</label><br />
+                                <input type="text" name="LastName" value=@customer.LastName />
+                            </p>
+
+
+            }
+        <p>
+            <input type="submit" value="Отправить" />
+        </p>
+    </form>
+</body>
