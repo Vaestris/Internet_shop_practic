@@ -41,7 +41,10 @@ namespace Internet_shop_practic
             return View("ActionName");
         }
 
-        // Выводит страницу для ввода заказа и данных заказчика.
+       /// <summary>
+       /// Выводит страницу для ввода заказа
+       /// </summary>
+       /// <returns></returns>
         public ActionResult GetOrder()
         {
 
@@ -49,7 +52,11 @@ namespace Internet_shop_practic
             return View(order);
         }
 
-        // Получает введенные данные.
+        /// <summary>
+        /// получает введенный заказ
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult GetOrder(Order order)
         {
@@ -70,12 +77,18 @@ namespace Internet_shop_practic
                 return View(order);
             }
         }
-
+        /// <summary>
+        /// Выводит странницу, сообщающую, что заказ успешно введен
+        /// </summary>
+        /// <returns></returns>
         public ActionResult OrderDone()
         {
             return View();
         }
-
+        /// <summary>
+        /// Выводит странциу ввода клиента
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetCustomer()
         {
 
@@ -83,7 +96,11 @@ namespace Internet_shop_practic
             return View();
         }
 
-        // Получает введенные данные.
+        /// <summary>
+        /// Получает введеные данные клиента
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult GetCustomer(Customer customer)
         {
@@ -94,6 +111,10 @@ namespace Internet_shop_practic
 
             
         }
+        /// <summary>
+        /// Выводит страницу, сообщаюшую, что данные успешно введены
+        /// </summary>
+        /// <returns></returns>
         public ActionResult CustomerGeted()
         {
             return View();
