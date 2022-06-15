@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Net;
 using System.Security.Authentication;
+
 
 namespace Internet_shop_practic
 {
@@ -10,14 +13,22 @@ namespace Internet_shop_practic
     /// </summary>
     public class Program
     {
-
+        private static string certificat;
+        private static string certificat_password;
         public static void Main(string[] args)
         {
+            var config = new ConfigurationBuilder()
+                   .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                   .AddJsonFile("appsettings.json").Build();
+            certificat = config.GetSection("Kestrel:Certificates:Default:Path").Value;
+            certificat_password = config.GetSection("Kestrel:Certificates:Default:Password").Value;
+            
             CreateHostBuilder(args).Build().Run();
+            
         }
 
         /// <summary>
-        /// Класс развертывает веб приложение
+        /// Развертывавает веб приложение
         /// </summary>
         /// <param name="args"></param>
         /// <returns></returns>
@@ -32,8 +43,8 @@ namespace Internet_shop_practic
 
                     });
                     serverOptions.Listen(IPAddress.Parse("0.0.0.0"), 5001, listenopt =>
-                    {
-                        listenopt.UseHttps("C:/Users/Ужас Страхович/Documents/ServerCert.pfx", "123");
+                    {                       
+                        listenopt.UseHttps(certificat, certificat_password);
                     }
                     );
                 }).UseStartup<Startup>() ;

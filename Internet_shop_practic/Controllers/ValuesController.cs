@@ -1,20 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Internet_shop_practic.Models;
 
 namespace Internet_shop_practic.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public Order GetOrder(Order order)
+        /// <summary>
+        /// Принимает данные заказа и вызывает проверку
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public dynamic GetOrder(Order order)
         {
-
             string[] errormessage;
             DBmodel programContext = new DBmodel();
 
@@ -31,9 +32,9 @@ namespace Internet_shop_practic.Controllers
             else
             {
 
-               // return errormessage;
+               return errormessage;
             }
             return order;
-        }
+        }      
     }
 }

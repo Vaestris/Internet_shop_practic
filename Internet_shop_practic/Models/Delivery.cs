@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Internet_shop_practic.Models
 {
     /// <summary>
-    /// Доставка
+    /// сущность "Доставка"
     /// </summary>
     public class Delivery
     {
@@ -34,7 +34,6 @@ namespace Internet_shop_practic.Models
         /// время доставки
         /// </summary>
         public DateTime Time { get; set; }
-
         /// <summary>
         /// Внешний ключ Заказа
         /// </summary>
@@ -44,6 +43,8 @@ namespace Internet_shop_practic.Models
         /// навигационные свойство 
         /// </summary>
         public Order Order { get; set; }
+
+
 
     }
 }

@@ -28,7 +28,7 @@ namespace Internet_shop_practic
         }
          
         /// <summary>
-        /// Регистрирует сервисы, которые используются приложением.
+        /// Регистрация сервисов и зависимостей
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
@@ -43,7 +43,7 @@ namespace Internet_shop_practic
         }
         
         /// <summary>
-        /// Устанавливает, как приложение будет обрабатывать запрос.
+        /// Конфигурация приложения и подключение сервисов
         /// </summary>
         /// <param name="app"></param>
         /// <param name="env"></param>
@@ -69,18 +69,7 @@ namespace Internet_shop_practic
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
-
-                endpoints.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}");
-
-                endpoints.MapControllerRoute(
-               name: "default",
-               pattern: "{controller=Home}/{action=ProductList}");
-
-                endpoints.MapControllerRoute(
-               name: "default",
-               pattern: "{controller=Home}/{action=PIndex}");    
+   
             });          
         }        
     }
