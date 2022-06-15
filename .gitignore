@@ -4,3 +4,5 @@ netcoreapp3.1
 obj/
 Properties
 .vs/
+Вырезанные элементы/
+.pfx
