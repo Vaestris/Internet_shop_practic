@@ -25,6 +25,16 @@ namespace Internet_shop_practic.Models
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Цена 
+        /// </summary>
+        public int Price { get; set; }
+        
+        /// <summary>
+        /// Сколько ед товара забронировано и не может учитываться в качестве доступного
+        /// </summary>
+        public int Booked { get; set; }
+
         public List<Order> Orders { get; set; }
 
     }

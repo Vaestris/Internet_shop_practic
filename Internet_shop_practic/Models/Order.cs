@@ -19,9 +19,9 @@ namespace Internet_shop_practic.Models
         /// Адресс доставки
         /// </summary>
        public string Address { get; set; }
-/*
+
         /// <summary>
-        /// Итоговая цена
+        /// Итоговая цена, получаемая из общей стоимости всех заказанных товаров
         /// </summary>
         public int TotalPrice { get; set; }
 
@@ -29,7 +29,7 @@ namespace Internet_shop_practic.Models
         /// Время и дата оплаты
         /// </summary>
         public DateTime PaymentTime { get; set; }
-*/
+
         /// <summary>
         /// Внешний ключ Заказчика
         /// </summary>
