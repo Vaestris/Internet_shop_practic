@@ -69,7 +69,10 @@ namespace Internet_shop_practic
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
-   
+                endpoints.MapControllerRoute(
+               name: "default",
+               pattern: "{controller=Home}/{action=GetCustomer}");
+
             });          
         }        
     }

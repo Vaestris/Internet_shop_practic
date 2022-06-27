@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿using System.Collections.Generic;
 using Internet_shop_practic.interfaces;
 using Internet_shop_practic.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Internet_shop_practic.Repository
 {

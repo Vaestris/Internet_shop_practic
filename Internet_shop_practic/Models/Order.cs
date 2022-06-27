@@ -14,11 +14,22 @@ namespace Internet_shop_practic.Models
         /// Id заказа
         /// </summary>
         public int Id { get; set; }
+
         /// <summary>
         /// Адресс доставки
         /// </summary>
-        public string Address { get; set; }
+       public string Address { get; set; }
+/*
+        /// <summary>
+        /// Итоговая цена
+        /// </summary>
+        public int TotalPrice { get; set; }
 
+        /// <summary>
+        /// Время и дата оплаты
+        /// </summary>
+        public DateTime PaymentTime { get; set; }
+*/
         /// <summary>
         /// Внешний ключ Заказчика
         /// </summary>
@@ -27,8 +38,7 @@ namespace Internet_shop_practic.Models
         /// <summary>
         /// Внешний ключ товара
         /// </summary>
-        public int ProductId { get; set; }
-
+        public int ProductId { get; set; } 
 
         /// <summary>
         /// навигационные свойство 
